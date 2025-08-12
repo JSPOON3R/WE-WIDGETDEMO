@@ -34,11 +34,17 @@
             padding: 0.5rem 1rem;
         }
 
+        h1 span {
+            color: #3aa957;
+            font-style: italic;
+            font-weight: lighter;
+        }
+
         .intro {
-            font-size: 1rem;
+            font-size: .8rem;
             background: #111;
             padding: 1rem;
-            border: 1px solid #333;
+            border: 1px solid #434343;
             border-radius: 10px;
         }
 
@@ -46,17 +52,19 @@
             font-size: .8rem;
             background: #111;
             width: 40%;
-            height: fit-content;
+            height: auto;
             padding: 1rem;
-            border: 1px solid #333;
+            border: 1px solid #434343;
             border-radius: 10px;
         }
 
         .description-heading {
-    display: flex;
-    font-size: 1.5em;
-    margin-bottom: .5em;
-    width: 100%;
+            display: flex;
+            font-weight:bold;
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            width: 100%;
+            color:#3aa957;
         }
 
         .main-area {
@@ -66,7 +74,7 @@
         }
 
         .tile-column {
-            flex: 1;
+            flex: 1.5;
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -74,7 +82,7 @@
         }
 
         .body-wrapper {
-            flex: 3;
+            flex: 5;
             min-width: 0;
             display: flex;
             flex-direction: column;
@@ -91,7 +99,7 @@
         .tile {
             background: #f4f4f4;
             color: #000;
-            border: 1px solid #999;
+            border: 1px solid #434343;
             border-radius: 4px;
             display: flex;
             flex-direction: column;
@@ -115,7 +123,7 @@
         }
 
         .tile-button {
-            background: #444;
+            background: #3aa957;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -133,15 +141,6 @@
         .button-titles {
             display: flex;
             gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .button-text {
-            margin-left: .5em;
-            width: 33%;
-            font-size: 0.8em;
-            color: #555;
-            flex-grow: 1;
         }
 
         .wide-button {
@@ -157,17 +156,49 @@
         }
 
         .wide-button:hover {
-            background: #555;
+            background: #3aa957;
         }
 
         #test-button {
             color: #333;
-            background: #fff;
+            background:
+                radial-gradient(120% 100% at 28% 30%, #b7f094, transparent 60%);
+            background-color: #74d66a;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        #test-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.5),
+                    transparent);
+            transform: skewX(-20deg);
         }
 
         #test-button:hover {
-            color: #333;
-            background: #ababab;
+            color: #fff;
+        }
+
+        #test-button:hover::after {
+            animation: gleam 1s ease forwards;
+        }
+
+        @keyframes gleam {
+            0% {
+                left: -75%;
+            }
+
+            100% {
+                left: 125%;
+            }
         }
 
         .body-wrapper img {
@@ -175,20 +206,27 @@
             max-height: 50vh;
             width: 100%;
             padding: 1em 2em;
+            align-self: center;
             object-fit: contain;
             border-radius: 10px;
-            border: 1px solid #333;
+            border: 1px solid #434343;
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
         }
 
+        .button-wrapper {
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: 10px;
+        }
+
         /* Hide tiles and specific text blocks on mobile */
-        @media (max-width: 768px) {
+        @media (max-width: 950px) {
             .hide-on-mobile {
                 display: none !important;
             }
 
             .intro-2 {
-                width: fit-content;
+                width: auto;
                 font-size: 0.85rem;
                 padding: 1.5rem;
             }
@@ -218,11 +256,7 @@
             .button-titles {
                 flex-direction: column;
                 gap: 0.5rem;
-            }
-
-            .button-text {
-                width: 100%;
-                font-size: 0.85rem;
+                margin: 0;
             }
 
             .wide-button {
@@ -252,14 +286,20 @@
 
 <body>
     <div class="container">
-        <h1>🧩 Custom Start Page: Create your own HTML</h1>
+        <h1>🧩 Custom Start Page: <span>newtab.html</span></h1>
 
         <div class="intro">
             Webfuse extensions allow you to improve the UX of your Space, augment web content and perform a range of
-            tasks.
-            <br><br>
-            You are looking at <strong>newtab.html</strong><br><br>
-            This HTML file will open whenever a new tab is created. The Tab Owner will be the user that triggers it.
+            tasks. This HTML page <i>(newtab.html)</i> will open whenever a new tab is created. The Tab Owner will be
+            the user that triggers it.
+        </div>
+
+        <div class="button-wrapper">
+            <div class="button-row">
+                <button class="wide-button hide-on-mobile" id="startScreensharing">Share Screen</button>
+                <button class="wide-button" id="shareFile">Upload a File</button>
+                <button class="wide-button" id="test-button"><b>Test the Widget</b></button>
+            </div>
         </div>
 
         <div class="main-area">
@@ -267,7 +307,7 @@
 
                 <div class="tile">
                     <div class="tile-header">
-                        <span>manifest.json</span>
+                        <span>🧩 manifest.json</span>
                         <button class="tile-button"
                             onclick="window.open('https://dev.webfuse.com/reference/extension-api/#manifestjson')">Go to
                             docs</button>
@@ -279,7 +319,7 @@
 
                 <div class="tile">
                     <div class="tile-header">
-                        <span>newtab.html</span>
+                        <span>🧩 newtab.html</span>
                         <button class="tile-button"
                             onclick="window.open('https://dev.webfuse.com/reference/extension-api/#new-tab-page')">Go to
                             docs</button>
@@ -291,7 +331,7 @@
 
                 <div class="tile">
                     <div class="tile-header">
-                        <span>content.js</span>
+                        <span>🧩 content.js</span>
                         <button class="tile-button"
                             onclick="window.open('https://dev.webfuse.com/reference/extension-api/#content-script')">Go
                             to docs</button>
@@ -303,7 +343,7 @@
 
                 <div class="tile">
                     <div class="tile-header">
-                        <span>popup.html</span>
+                        <span>🧩 popup.html</span>
                         <button class="tile-button"
                             onclick="window.open('https://dev.webfuse.com/reference/extension-api/#popup-page')">Go to
                             docs</button>
@@ -315,7 +355,7 @@
 
                 <div class="tile">
                     <div class="tile-header">
-                        <span>background.js</span>
+                        <span>🧩 background.js</span>
                         <button class="tile-button"
                             onclick="window.open('https://dev.webfuse.com/reference/extension-api/#service-worker')">Go
                             to docs</button>
@@ -328,21 +368,6 @@
             </div>
 
             <div class="body-wrapper">
-                <div class="button-titles hide-on-mobile">
-                    <div class="button-text">
-                        Example: <a href="https://dev.webfuse.com/reference/session-api/" target="_blank"
-                            style="color: inherit; text-decoration: underline;">Session API</a> Method:
-                    </div>
-                    <div class="button-text">Example: <a href="https://dev.webfuse.com/reference/session-api/"
-                            target="_blank" style="color: inherit; text-decoration: underline;">Session API</a> Command:
-                    </div>
-                    <div class="button-text">Test the extension flow:</div>
-                </div>
-                <div class="button-row">
-                    <button class="wide-button hide-on-mobile" id="startScreensharing">Share Screen</button>
-                    <button class="wide-button" id="shareFile">Upload a File</button>
-                    <button class="wide-button" id="test-button"><b>Test the Widget</b></button>
-                </div>
                 <div class="uml-wrapper">
                     <img src="https://demo.surfly.com/resources-common/images/template_uml.png"
                         alt="Widget State Initialization Diagram" />
